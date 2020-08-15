@@ -99,8 +99,16 @@
             $$\sum_{r = 1}^{4} N_{rj} = N_j$$
             En otras palabras, los estados forman una partición del conjunto de población de una entidad. 
             <h2 class="text-size-30">Grafo Dirigido</h2>
+            <p class="margin-bottom-40">
             Podemos representar las relaciones entre estados usando un grafo dirigido donde se muestren las probabilidades de transicionar de un estado a otro. Por ejemplo, si hay mucha gente infectada, la probabilidad de pasar del estado 1 al 2 es alta. 
-            De igual forma, podemos hacer una hipótesis con base en los resultados de la sección "Visualización de comorbilidades en México". 
+            En el grafo, representamos cada estado por un nodo distinto con aristas cuyo sentido indican 6 de las \(2\times{4 \choose 2} = 12\):
+            </p>
+            <!-- GRAFO -->
+            <div class="mxgraph" style="max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-15T06:22:07.094Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;8KUuK7LUqN_IvzLIXw5K\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tZs8FXnMoS0vjJrxgnF6\&quot; name=\&quot;Page-1\&quot;&gt;5VtLc+I4EP41VO0eQsmS/DoGkskeNlWpyWEnR2MLUMVgSpYJzK9fCT+wZcevAUxIDimr3Wo9vq9bLcmM0HS1e2LOZvkceMQfQeDtRuhhBKFtWeK/FOxjgY5RLFgw6sUi7Sh4pb9JIgSJNKIeCQuKPAh8TjdFoRus18TlBZnDWPBRVJsHfrHVjbMgJcGr6/hl6X/U48tYaungKP+H0MUybVkDyZuZ474vWBCtk/ZGEM0Pf/HrlZPaSloIl44XfMSigwn0OEJTFgQ8flrtpsSXU5tOW9zOj0/eZv1mZM3bVLB/IuNpg5j2/rZ8ef7Xvn8y3+4SK1vHj0g6DMMX9iYe3YrHhXx8jUKXbDidiTlL3opmcgoVdf6SsGh/p29mTNVVLRymiO9TWETfBQNEYfKxpJy8bhxXvvkQHBSyJV/50r54dMJNTIs53REx1Mmc+v408AN2MIQMZ+bhmZCHnAXvJH2zDtYka3dLGCe7T+dVy9ASTkCCFeFsL1R2GSPiKvuU2En540inTLbMUykVOgmFF5ntI4ziIUGyA6qwDaqP6zlhq6AbovA7IIqAgigaHFHUBtGfxI02hIkw0w1U9C1A1YugQmtwUHEbUJ8jMeqOgOLvACi2ri7u6hWAqvO79u5l1iJKru+EIXWL0yoGz/a/ROEOjEEmeBMCMMY4LT/IOQBZaZ+WdpTLutoYoKSY1kzLx5qykK/4QhgV00BY3rQqjMdDvFJOpaAmxhxEzCXNqQd32ILwpsWszIIcynoFyKmMEd/hdFvsbhXwSQsvARUDOS7uthI1kMKdeJhJrXz2pRiCWGGrpRiK56Fk6MDDbNj9qWmcgJoJuzJmZvTSrX7s+nWobdtGkee6rTUR/czchC25+UmEugw3oWYWuQmNftzUDFw0BOBFuWmeMGyCMSqSCaCWQROMDbPAarsnq6+Al2hQXkKFl6gnL5Gys4Lqwn1mXlon5aVpFYlp662JiewcMfPh93qYib7Cao4sa6wrMROmkq7sxJqmGjNN1diZGZo6yIkoqiacut024SymA/XsvJIYiYdkIk6rfBbaWrNQPavASrA9NwOrThD7M9BWgiQyWjLwDpT3PN1pWBU5T0hN/BWCZIlRdl9qGkWOa4Z9WWpWna8o1HQjtpWnFwkP2yeZZtcs88+i3nXvRLTSUQzqRxnVkN4u4ROoOfuc2kYqhF36Czp1y2pQN4rqZoM6rrMuHuLhndY3WhxVDesbx+zX1oxCYIegIbJfIIgP5Wm6qTC3755f14ubNA20C85dXU23VVcz6vul6FsN6sp8mA3qep31M7lai6O3r7EMDbZtU0mPei4vCJn1hk5E+nKH61eAkr7WoK93W78QqrV/Jt63ONb7Grxve/wxWMaOlXMI9W6h/ZEGrDd0Iv8oddg06/ul6usN+lDRxw36oNb+mfzDLvvHDzCyH0b2dGRl97VhNEsva+VeO7vEzclLbsXJjiu3tT5drKVjCWZL/k/k1St1Hf8+ebGinierTxgJ6W9ndjAlnSTBUtjVJyP9QdqKeBDG33Fpp7nK1ZT4l+bPOfdBFe4Dz/b9TMWhRj00Uv0moUHKXsYeGhrYFRq5xt8kNFjZN2ZXzINhU/GVUj02GN8oNqVtzNDQVJyFNSw2txrRSl9iDO42FWcxDavNrSYCUN2omENjU7F5bwhpt+o3GCrYVHwVe1lsKjaYDX5zq8tNCZvB/abi24kGbG41TUNXl6Z13niiW41pyLoYNqJ4/K1PfIZw/D0Vevwf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+            <script type="text/javascript" src="https://app.diagrams.net/js/viewer-static.min.js"></script>
+            
+            
+            
             <div class="line">
               <div class="margin">
                 <div class="s-12 m-12 l-6 margin-m-bottom-30">
