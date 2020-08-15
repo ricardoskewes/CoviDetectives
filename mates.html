@@ -93,7 +93,7 @@
             Nuestro modelo se basa <b>sobre</b> una cadena de Markov de tiempo discreto que contiene cuatro estados de transición. Denotaremos por el conjunto \(S = {1,2,3,4}\) el conjunto de estados posibles
             \(s_{ij} (t = 0) = 0\) para todo \(i = 1,2, ..., N_j\), para la j-ésima entidad federativa, donde \(N_j\) es la población total. Como México tiene 32 entidades federativas, \(j = 1, 2, ..., 32\).
             <br>Considerando los datos reportados por la Secretaría de Salud, lo más sencillo fue clasificar los \(N_j\) habitantes de una entidad en susceptibles (\(s = 1\)), enfermos (\(s = 2\)), recuperados (\(s = 3\)) y muertos (\(s = 4\)).
-            Notar que, si sumamos los números de personas por caso,
+            Notar que, si sumamos los números de personas por caso, el resultado da:
             $$\sum_{r = 1}^{4} N_{rj} = N_j$$
             <b>En otras palabras, los estados forman una partición del conjunto de población de una entidad. </b> 
             <h2 class="text-size-30">Grafo Dirigido</h2>
