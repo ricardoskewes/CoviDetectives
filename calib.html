@@ -64,59 +64,9 @@
         <div class="section background-white"> 
           <div class="line">
             <h2 class="text-size-30">Código</h2>
+            
          <!----------CODIGO--------->   
-            <code>
-              #Código para generar Matrices de Markov no homogéneas
-
-
-              import numpy as np
-              import pandas as pd
-              import matplotlib.pyplot as plt
-              import matplotlib.patches as mpatches 
-              from matplotlib.collections import PatchCollection
-              from random import seed
-              from random import random
-
-
-
-              #Escribir transpuesta de la matriz de transición (pues trabajamos con vectores renglón)
-
-              matrizTransicion = np.array([[0,  0,   0,   0], 
-                                           [0,  0,   0,   0], 
-                                           [0,  0.9, 1,   0],
-                                           [0,  0.1,   0,   1]])
-              #Escribir la población como un vector 
-              poblacion = np.array([80, 1,0,0])
-              t = 0
-
-              hist = []
-
-              def pi_12(a, b, c, vec):
-                prob = (vec[0]**(-a)) * (vec[1]**(b))*((0.66-(vec[2])/(vec[0]+ vec[1] + vec[2]))**c)
-                return prob
-
-
-              while t<100:
-                matrizTransicion[1][0] = pi_12(0.8, 0.7, 0.6, poblacion)
-                matrizTransicion[0][0] = 1-matrizTransicion[1][0]
-                hist.append(np.concatenate((np.array([t]), poblacion)).tolist())
-                #Actualizar para t+1:
-                poblacion = matrizTransicion.dot(poblacion)
-                t+=1
-
-
-              histDF = pd.DataFrame(hist, columns = ['t', 'N1', 'N2', 'N3', 'N4'])
-
-              print(histDF)
-              ax = plt.gca()
-
-              histDF.plot(kind='line',x='t',y='N1',ax=ax)
-              histDF.plot(kind='line',x='t',y='N2', color='red', ax=ax)
-              histDF.plot(kind='line',x='t',y='N3', color='green', ax=ax)
-              histDF.plot(kind='line',x='t',y='N4', color='purple', ax=ax)
-
-
-            </code>
+            
             <p>
             Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. 
             Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. 
