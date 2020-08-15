@@ -85,10 +85,16 @@
         <div class="section background-white"> 
           <div class="line">
             <h2 class="text-size-30">Notas Previas a Modelo</h2>
-            <p>
-            Hay incertidumbre grande sobre tasas de infección a largo plazo, pero haremos un análisis simplificado que rentaba ciertos parámetros de países con políticas y culturas muy distintas. Tenemos esto muy en mente, por lo
-            que seremos cuidadosos al elegir los parámetros que se caracterizen como universales para el virus SARS-CoV2 y aquellos que sean característicos de la población mexicana. 
-            </p> 
+            <ul>
+              <li>A través de discusiones entre los CoviDetectives, deliberamos buscar un modelo más realista que el visto en sesiones.</li>
+              <li>Nuestro modelo tiene componentes basados en un análisis hecho para Alemania en el artículo de Roch-Donsinomi, Glawion et al. (2020).</li>
+              <li>Sin embargo, llevamos a cabo significativas modificaciones: en lugar de inferir ecuaciones diferenciales a partir de simplificaciones a f.d.p, a partir una cadena de Markov de tiempo <b>continuo</b>, 
+                nosotros hicimos las multiplicaciones mecánicas de la matriz de transición (con NumPy). Asimismo, alteramos los estados de transición para adecuarlos a México y empleamos cadenas de Markov <b>discretas y no homogéneas. </b></li>
+              <li>Para saber más sobre este fascinante tipo de cadenas de Markov, ver Cheng-Chi (1977) en las referencias. </li>
+            </ul> 
+            
+             
+            
             <br>
             <h2 class="text-size-30">Cadenas de Markov</h2>
             <p class="margin-bottom-40">
@@ -97,82 +103,25 @@
             <br>Considerando los datos reportados por la Secretaría de Salud, lo más sencillo fue clasificar los \(N_j\) habitantes de una entidad en susceptibles (\(s = 1\)), enfermos (\(s = 2\)), recuperados (\(s = 3\)) y muertos (\(s = 4\)).
             Notar que, si sumamos los números de personas por caso,
             $$\sum_{r = 1}^{4} N_{rj} = N_j$$
-            En otras palabras, los estados forman una partición del conjunto de población de una entidad. 
+            <b>En otras palabras, los estados forman una partición del conjunto de población de una entidad. </b> 
             <h2 class="text-size-30">Grafo Dirigido</h2>
             <p class="margin-bottom-40">
             Podemos representar las relaciones entre estados usando un grafo dirigido donde se muestren las probabilidades de transicionar de un estado a otro. Por ejemplo, si hay mucha gente infectada, la probabilidad de pasar del estado 1 al 2 es alta. 
-            En el grafo, representamos cada estado por un nodo distinto con aristas cuyo sentido indican 6 de las \(2\times{4 \choose 2} = 12\). El grafo es interactivo:
+            En el grafo, representamos cada estado por un nodo distinto con aristas cuyo sentido indican 10 de las \(2\times{4 \choose 2}+4 = 16\). <b>El grafo es interactivo:</b>
             </p>
             <!-- GRAFO -->
             <div class="container">
-            <div class="mxgraph" style="margin-left: auto; margin-right: auto; max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-15T06:22:07.094Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;8KUuK7LUqN_IvzLIXw5K\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tZs8FXnMoS0vjJrxgnF6\&quot; name=\&quot;Page-1\&quot;&gt;5VtLc+I4EP41VO0eQsmS/DoGkskeNlWpyWEnR2MLUMVgSpYJzK9fCT+wZcevAUxIDimr3Wo9vq9bLcmM0HS1e2LOZvkceMQfQeDtRuhhBKFtWeK/FOxjgY5RLFgw6sUi7Sh4pb9JIgSJNKIeCQuKPAh8TjdFoRus18TlBZnDWPBRVJsHfrHVjbMgJcGr6/hl6X/U48tYaungKP+H0MUybVkDyZuZ474vWBCtk/ZGEM0Pf/HrlZPaSloIl44XfMSigwn0OEJTFgQ8flrtpsSXU5tOW9zOj0/eZv1mZM3bVLB/IuNpg5j2/rZ8ef7Xvn8y3+4SK1vHj0g6DMMX9iYe3YrHhXx8jUKXbDidiTlL3opmcgoVdf6SsGh/p29mTNVVLRymiO9TWETfBQNEYfKxpJy8bhxXvvkQHBSyJV/50r54dMJNTIs53REx1Mmc+v408AN2MIQMZ+bhmZCHnAXvJH2zDtYka3dLGCe7T+dVy9ASTkCCFeFsL1R2GSPiKvuU2En540inTLbMUykVOgmFF5ntI4ziIUGyA6qwDaqP6zlhq6AbovA7IIqAgigaHFHUBtGfxI02hIkw0w1U9C1A1YugQmtwUHEbUJ8jMeqOgOLvACi2ri7u6hWAqvO79u5l1iJKru+EIXWL0yoGz/a/ROEOjEEmeBMCMMY4LT/IOQBZaZ+WdpTLutoYoKSY1kzLx5qykK/4QhgV00BY3rQqjMdDvFJOpaAmxhxEzCXNqQd32ILwpsWszIIcynoFyKmMEd/hdFvsbhXwSQsvARUDOS7uthI1kMKdeJhJrXz2pRiCWGGrpRiK56Fk6MDDbNj9qWmcgJoJuzJmZvTSrX7s+nWobdtGkee6rTUR/czchC25+UmEugw3oWYWuQmNftzUDFw0BOBFuWmeMGyCMSqSCaCWQROMDbPAarsnq6+Al2hQXkKFl6gnL5Gys4Lqwn1mXlon5aVpFYlp662JiewcMfPh93qYib7Cao4sa6wrMROmkq7sxJqmGjNN1diZGZo6yIkoqiacut024SymA/XsvJIYiYdkIk6rfBbaWrNQPavASrA9NwOrThD7M9BWgiQyWjLwDpT3PN1pWBU5T0hN/BWCZIlRdl9qGkWOa4Z9WWpWna8o1HQjtpWnFwkP2yeZZtcs88+i3nXvRLTSUQzqRxnVkN4u4ROoOfuc2kYqhF36Czp1y2pQN4rqZoM6rrMuHuLhndY3WhxVDesbx+zX1oxCYIegIbJfIIgP5Wm6qTC3755f14ubNA20C85dXU23VVcz6vul6FsN6sp8mA3qep31M7lai6O3r7EMDbZtU0mPei4vCJn1hk5E+nKH61eAkr7WoK93W78QqrV/Jt63ONb7Grxve/wxWMaOlXMI9W6h/ZEGrDd0Iv8oddg06/ul6usN+lDRxw36oNb+mfzDLvvHDzCyH0b2dGRl97VhNEsva+VeO7vEzclLbsXJjiu3tT5drKVjCWZL/k/k1St1Hf8+ebGinierTxgJ6W9ndjAlnSTBUtjVJyP9QdqKeBDG33Fpp7nK1ZT4l+bPOfdBFe4Dz/b9TMWhRj00Uv0moUHKXsYeGhrYFRq5xt8kNFjZN2ZXzINhU/GVUj02GN8oNqVtzNDQVJyFNSw2txrRSl9iDO42FWcxDavNrSYCUN2omENjU7F5bwhpt+o3GCrYVHwVe1lsKjaYDX5zq8tNCZvB/abi24kGbG41TUNXl6Z13niiW41pyLoYNqJ4/K1PfIZw/D0Vevwf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+            <div class="mxgraph" style="margin-left: auto; margin-right: auto;  max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-15T06:22:07.094Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;8KUuK7LUqN_IvzLIXw5K\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tZs8FXnMoS0vjJrxgnF6\&quot; name=\&quot;Page-1\&quot;&gt;5VtLc+I4EP41VO0eQsmS/DoGkskeNlWpyWEnR2MLUMVgSpYJzK9fCT+wZcevAUxIDimr3Wo9vq9bLcmM0HS1e2LOZvkceMQfQeDtRuhhBKFtWeK/FOxjgY5RLFgw6sUi7Sh4pb9JIgSJNKIeCQuKPAh8TjdFoRus18TlBZnDWPBRVJsHfrHVjbMgJcGr6/hl6X/U48tYaungKP+H0MUybVkDyZuZ474vWBCtk/ZGEM0Pf/HrlZPaSloIl44XfMSigwn0OEJTFgQ8flrtpsSXU5tOW9zOj0/eZv1mZM3bVLB/IuNpg5j2/rZ8ef7Xvn8y3+4SK1vHj0g6DMMX9iYe3YrHhXx8jUKXbDidiTlL3opmcgoVdf6SsGh/p29mTNVVLRymiO9TWETfBQNEYfKxpJy8bhxXvvkQHBSyJV/50r54dMJNTIs53REx1Mmc+v408AN2MIQMZ+bhmZCHnAXvJH2zDtYka3dLGCe7T+dVy9ASTkCCFeFsL1R2GSPiKvuU2En540inTLbMUykVOgmFF5ntI4ziIUGyA6qwDaqP6zlhq6AbovA7IIqAgigaHFHUBtGfxI02hIkw0w1U9C1A1YugQmtwUHEbUJ8jMeqOgOLvACi2ri7u6hWAqvO79u5l1iJKru+EIXWL0yoGz/a/ROEOjEEmeBMCMMY4LT/IOQBZaZ+WdpTLutoYoKSY1kzLx5qykK/4QhgV00BY3rQqjMdDvFJOpaAmxhxEzCXNqQd32ILwpsWszIIcynoFyKmMEd/hdFvsbhXwSQsvARUDOS7uthI1kMKdeJhJrXz2pRiCWGGrpRiK56Fk6MDDbNj9qWmcgJoJuzJmZvTSrX7s+nWobdtGkee6rTUR/czchC25+UmEugw3oWYWuQmNftzUDFw0BOBFuWmeMGyCMSqSCaCWQROMDbPAarsnq6+Al2hQXkKFl6gnL5Gys4Lqwn1mXlon5aVpFYlp662JiewcMfPh93qYib7Cao4sa6wrMROmkq7sxJqmGjNN1diZGZo6yIkoqiacut024SymA/XsvJIYiYdkIk6rfBbaWrNQPavASrA9NwOrThD7M9BWgiQyWjLwDpT3PN1pWBU5T0hN/BWCZIlRdl9qGkWOa4Z9WWpWna8o1HQjtpWnFwkP2yeZZtcs88+i3nXvRLTSUQzqRxnVkN4u4ROoOfuc2kYqhF36Czp1y2pQN4rqZoM6rrMuHuLhndY3WhxVDesbx+zX1oxCYIegIbJfIIgP5Wm6qTC3755f14ubNA20C85dXU23VVcz6vul6FsN6sp8mA3qep31M7lai6O3r7EMDbZtU0mPei4vCJn1hk5E+nKH61eAkr7WoK93W78QqrV/Jt63ONb7Grxve/wxWMaOlXMI9W6h/ZEGrDd0Iv8oddg06/ul6usN+lDRxw36oNb+mfzDLvvHDzCyH0b2dGRl97VhNEsva+VeO7vEzclLbsXJjiu3tT5drKVjCWZL/k/k1St1Hf8+ebGinierTxgJ6W9ndjAlnSTBUtjVJyP9QdqKeBDG33Fpp7nK1ZT4l+bPOfdBFe4Dz/b9TMWhRj00Uv0moUHKXsYeGhrYFRq5xt8kNFjZN2ZXzINhU/GVUj02GN8oNqVtzNDQVJyFNSw2txrRSl9iDO42FWcxDavNrSYCUN2omENjU7F5bwhpt+o3GCrYVHwVe1lsKjaYDX5zq8tNCZvB/abi24kGbG41TUNXl6Z13niiW41pyLoYNqJ4/K1PfIZw/D0Vevwf&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
             </div>
             <script type="text/javascript" src="https://app.diagrams.net/js/viewer-static.min.js"></script>
-            
-            
-            
-            <div class="line">
-              <div class="margin">
-                <div class="s-12 m-12 l-6 margin-m-bottom-30">
-                  <h2>Mirum est notare quam littera gothica</h2>
-                  <p>
-                  Typi non habent claritatem insitam est usus legentis in iis qui facit eorum claritatem. 
-                  Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. 
-                  Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                  </p>
-                </div>
-                <div class="s-12 m-12 l-6">
-                  <h2>Claritas est etiam processus dynamicus</h2>
-                  <p>
-                  Typi non habent claritatem insitam est usus legentis in iis qui facit eorum claritatem. 
-                  Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. 
-                  Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
-                  </p>
-                </div>
-              </div>  
-            </div>
-          </div>
-        </div> 
-      </article>
+               
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      <blockquote class="margin-top-bottom-20">
-        Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
-      </blockquote>
-
-
-      <!-- Content -->
+            <br>
+      <!-- SUPOSICIONES MODELO -->
       <article>
         <header class="section background-primary text-center">
-            <h1 class="text-white margin-bottom-0 text-size-50 text-thin text-line-height-1">Suposiciones del modelo</h1>
+            <h1 class="text-white margin-bottom-10 text-size-50 text-thin text-line-height-1">Suposiciones del modelo</h1>
+            <h1 class="text-white margin-bottom-0 text-size-20 text-thin text-line-height-1">(Y una breve explicación por si no te gustan las mates)</h1>
         </header>
         <div class="section background-white"> 
           <div class="line">
@@ -180,64 +129,103 @@
               <div class="s-12 m-12 l-4 margin-bottom">
                 <div class="padding-2x block-bordered border-radius">
                   <h2>$$\pi_{21} = 0$$</h2>
-                  <h2 class="text-thin">Es decir:</h2>
+                  <h2 class="text-thin">En español:</h2>
                   <p class="margin-bottom-30">No consideramos falsos positivos en nuestro modelo.</p>
                 </div>
               </div>
               <div class="s-12 m-12 l-4 margin-bottom">
                 <div class="padding-2x block-bordered border-radius">
                   <h2>$$\pi_{32} = 0$$</h2>
-                  <h2 class="text-thin">Es decir:</h2>
+                  <h2 class="text-thin">En español:</h2>
                   <p class="margin-bottom-30">No hay casos de personas que se enfermen más de una vez.</p>
                 </div>
               </div>
               <div class="s-12 m-12 l-4 margin-bottom">
                 <div class="padding-2x block-bordered border-radius">
                   <h2>$$\pi_{34} = 0$$</h2>
-                  <h2 class="text-thin">Es decir:</h2>
+                  <h2 class="text-thin">En español:</h2>
                   <p class="margin-bottom-30">Las personas que se recuperaron, no pueden morir por Covid-19.</p>
-                </div>
-              </div>
-            </div>
-              <div class="s-12 m-12 l-4 margin-bottom">
-                <div class="padding-2x block-bordered border-radius">
-                  <i class="icon-heart icon2x text-primary margin-bottom-30"></i>
-                  <h2 class="text-thin">Intuitive</h2>
-                  <p class="margin-bottom-30">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
-                  <a class="button border-radius background-primary text-size-12 text-white text-strong" href="/">GET MORE INFO</a>
-                </div>
-              </div>
-              <div class="s-12 m-12 l-4 margin-bottom">
-                <div class="padding-2x block-bordered border-radius">
-                  <i class="icon-attachment icon2x text-primary margin-bottom-30"></i>
-                  <h2 class="text-thin">Useful</h2>
-                  <p class="margin-bottom-30">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
-                  <a class="button border-radius background-primary text-size-12 text-white text-strong" href="/">GET MORE INFO</a>
-                </div>
-              </div>
-              <div class="s-12 m-12 l-4 margin-bottom">
-                <div class="padding-2x block-bordered border-radius">
-                  <i class="icon-reorder icon2x text-primary margin-bottom-30"></i>
-                  <h2 class="text-thin">Responsive navigation</h2>
-                  <p class="margin-bottom-30">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
-                  <a class="button border-radius background-primary text-size-12 text-white text-strong" href="/">GET MORE INFO</a>
-                </div>
-              </div>
-              <div class="s-12 m-12 l-4">
-                <div class="padding-2x block-bordered border-radius">
-                  <i class="icon-mail icon2x text-primary margin-bottom-30"></i>
-                  <h2 class="text-thin">Responsive components</h2>
-                  <p class="margin-bottom-30">Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis</p>
-                  <a class="button border-radius background-primary text-size-12 text-white text-strong" href="/">GET MORE INFO</a>
                 </div>
               </div>
             </div>
           </div>
           
+          <div class="line">
+            <div class="margin text-center">
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h2>$$\pi_{43} = 0$$</h2>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">Los muertos no pueden estar recuperados</p>
+                </div>
+              </div>
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h2>$$\pi_{42} = 0$$</h2>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">Hasta dónde sabemos, la ciencia aún no puede resucitar gente.</p>
+                </div>
+              </div>
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h4>$$\frac{dN_j}{dt} = 0$$</h4>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">El número de habitantes por entidad es constante.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="line">
+            <div class="margin text-center">
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h4>$$\frac{\partial \pi_{12}}{\partial \nu_j} = 0$$</h4>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">Tasa de contagios no depende de la tasa de comorbilidades</p>
+                </div>
+              </div>
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h2>$$\lim_{t \to \infty} \pi_{12} = 0$$</h2>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">La pandemia (y los contagios) deben terminar.</p>
+                </div>
+              </div>
+              <div class="s-12 m-12 l-4 margin-bottom">
+                <div class="padding-2x block-bordered border-radius">
+                  <h4>$$\lim_{t \to \infty} \frac{N_3(t)}{\sum_{r=1}^3 N_r (t)} = \rho_{\infty}$$</h4>
+                  <h2 class="text-thin">En español:</h2>
+                  <p class="margin-bottom-30">La inmunidad de rebaño se logra con \(\rho_{\infty} \approx 2/3\) del mundo.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div> 
+
+        <h2 class="text-size-30">Grafo Dirigido (Continuación)</h2>
+            <p class="margin-bottom-40">
+            Las suposiciones de arriba nos permiten borrar todas las \(\pi_{rs}\) que sean iguales a cero. Notar que \(s_{ij} = 3\) y \(s_{ij} = 4\) corresponden a estados absorventes: una vez que se llega ahí,
+            no se puede salir. </p>
+            <div class="mxgraph" style="margin-left: auto; margin-right: auto; max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-15T10:11:30.283Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;XdznF2pbJN2nb4cPqBi5\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tZs8FXnMoS0vjJrxgnF6\&quot; name=\&quot;Page-1\&quot;&gt;5VpLc6M4EP41VO0exgWSeB1jJ5M9bKpSk8NujhhkWxVsUUL4Mb9+JfMwCMzDYw9ZJ5dIrVbr8X3daiRrcLbePzMvWr3QAIca0IO9Bh81AAzXtsU/KTlkEt0xU8mSkSCTnQRv5CfOFTNpQgIcVxQ5pSEnUVXo080G+7wi8xiju6ragobVUSNviWuCN98L69J/SMBXqdQx9ZP8L0yWq3xkQ89a5p7/sWQ02WTjaQAujn9p89rLbWUjxCsvoLtUdDQBnzQ4Y5TytLTez3AoNzfftnSc72dai3kzvOF9Org/oPUcQWZ8vK9eX/52H57t92+Zla0XJjhfhhUKe9OAbEVxKYtvSezjiJO52LOsVQxTUmjo84eExfgzb5kzVVe1cNwifshhEXMXDBCV6W5FOH6LPF+27AQLhWzF16G0L4peHKW0WJA9FkudLkgYzmhI2dEQtLx5gOZCHnNGP3DesqEbXIy7xYzj/dl9NQq0hBtgusacHYTKvmBE2qXwgKy+O9GpkK3KVMqFXkbhZWH7BKMoZEgOQBX0QfVps8BsTYchCr4ColBXEIWjIwr7IPoD+0mEmQgzw0CFXwJUswoqcEYHFfUB9SURqx4IKPoKgCLn08VdswFQdX83wYPMWkTND704Jn51W8Xi2eFfUfmmT/RC8C4E+gShvP4o90Avaoe8tidc9jUmOsyqec+8fuopK+WOr5gRsQ2YlU2rwnQ9OKjlVApqYs00YT7uTj24x5aYdx1mdRaUUDYbQM5lDIceJ9vqdJuAz0Z4pUQs5HS4u0rUgAp30mVmvcrZl2IIIIWtjmIo3YeaoSMPi2VfTk37itTUJ7BKTB32JKY+sewKMV3n0/ES9OQlHJOXANgKL63LeAmV7BWowfHGvMyHvxIx1ZBpun1DZoWWZjsrPwkD0ZgMRHmXc8Tpy0CkZttIofKtGdiUhikM9BO2lUlORrf+cdIeGih/jVqdlDmTUv2mw7SWscHLKKMaMvvFLIGadyipRVIhHjJffdC0nA51q6pud6ijNuuikC7vur7RI6Md1zdOmYVrWJUYDnQ0OLe4YhAfNTibtsJccGF6YJrVPMPQ3Zu4mumqrma1z0vRdzrUlf2wO9TNNus3cjXrs7taX+cYi/RQJT288HiB0G43dCXS1yfcfgLU9I0OfXPY+QVhq/0b8b7Hl+n/g/c9DoVRvxkRMivwAvUKonfGboB2Q1fyj9qEs8fGs/NS9c0OfaDoow59vdX+jfzDrfvHd11zHzV3pjnFtW6czPM7XcMo3fWW5DW34njPlUvdkCw30rEEsyX/p/KGlvhe+JA1rEkQyO5ThmPy05sfTUknybAUds2pZj5KWwmncfrca1znxtdQ4l+eP5fcBza4D7jZM1vD62k7NFL9LqGByreMOzY0YCg08oy/S2iQ8t1Y3ESPhk3DY2Y7NgjdKTa1z5ixoWm4C+s4bO41otUebEZ3m4ZEueO0uVe3QUDBxh4bG2cwNvd63MDfd9yI6unnc2m+ffqRInz6Dw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+            <script type="text/javascript" src="https://app.diagrams.net/js/viewer-static.min.js"></script>
       </article>
+      
+    <!--CALCULO DE PROBABILIDADES-->
+    <article>
+      <header class="section background-primary text-center">
+          <h1 class="text-white margin-bottom-10 text-size-50 text-thin text-line-height-1">Cálculo de probabilidades \(\pi_{rs}(t)\)</h1>
+      </header>
+
+      <h2 class="text-size-30">Grafo Dirigido (Continuación)</h2>
+          <p class="margin-bottom-40">
+          Las suposiciones de arriba nos permiten borrar todas las \(\pi_{rs}\) que sean iguales a cero. Notar que \(s_{ij} = 3\) y \(s_{ij} = 4\) corresponden a estados absorventes: una vez que se llega ahí,
+          no se puede salir. </p>
+          <div class="mxgraph" style="margin-left: auto; margin-right: auto; max-width:100%;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-15T10:11:30.283Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;XdznF2pbJN2nb4cPqBi5\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;tZs8FXnMoS0vjJrxgnF6\&quot; name=\&quot;Page-1\&quot;&gt;5VpLc6M4EP41VO0exgWSeB1jJ5M9bKpSk8NujhhkWxVsUUL4Mb9+JfMwCMzDYw9ZJ5dIrVbr8X3daiRrcLbePzMvWr3QAIca0IO9Bh81AAzXtsU/KTlkEt0xU8mSkSCTnQRv5CfOFTNpQgIcVxQ5pSEnUVXo080G+7wi8xiju6ragobVUSNviWuCN98L69J/SMBXqdQx9ZP8L0yWq3xkQ89a5p7/sWQ02WTjaQAujn9p89rLbWUjxCsvoLtUdDQBnzQ4Y5TytLTez3AoNzfftnSc72dai3kzvOF9Org/oPUcQWZ8vK9eX/52H57t92+Zla0XJjhfhhUKe9OAbEVxKYtvSezjiJO52LOsVQxTUmjo84eExfgzb5kzVVe1cNwifshhEXMXDBCV6W5FOH6LPF+27AQLhWzF16G0L4peHKW0WJA9FkudLkgYzmhI2dEQtLx5gOZCHnNGP3DesqEbXIy7xYzj/dl9NQq0hBtgusacHYTKvmBE2qXwgKy+O9GpkK3KVMqFXkbhZWH7BKMoZEgOQBX0QfVps8BsTYchCr4ColBXEIWjIwr7IPoD+0mEmQgzw0CFXwJUswoqcEYHFfUB9SURqx4IKPoKgCLn08VdswFQdX83wYPMWkTND704Jn51W8Xi2eFfUfmmT/RC8C4E+gShvP4o90Avaoe8tidc9jUmOsyqec+8fuopK+WOr5gRsQ2YlU2rwnQ9OKjlVApqYs00YT7uTj24x5aYdx1mdRaUUDYbQM5lDIceJ9vqdJuAz0Z4pUQs5HS4u0rUgAp30mVmvcrZl2IIIIWtjmIo3YeaoSMPi2VfTk37itTUJ7BKTB32JKY+sewKMV3n0/ES9OQlHJOXANgKL63LeAmV7BWowfHGvMyHvxIx1ZBpun1DZoWWZjsrPwkD0ZgMRHmXc8Tpy0CkZttIofKtGdiUhikM9BO2lUlORrf+cdIeGih/jVqdlDmTUv2mw7SWscHLKKMaMvvFLIGadyipRVIhHjJffdC0nA51q6pud6ijNuuikC7vur7RI6Md1zdOmYVrWJUYDnQ0OLe4YhAfNTibtsJccGF6YJrVPMPQ3Zu4mumqrma1z0vRdzrUlf2wO9TNNus3cjXrs7taX+cYi/RQJT288HiB0G43dCXS1yfcfgLU9I0OfXPY+QVhq/0b8b7Hl+n/g/c9DoVRvxkRMivwAvUKonfGboB2Q1fyj9qEs8fGs/NS9c0OfaDoow59vdX+jfzDrfvHd11zHzV3pjnFtW6czPM7XcMo3fWW5DW34njPlUvdkCw30rEEsyX/p/KGlvhe+JA1rEkQyO5ThmPy05sfTUknybAUds2pZj5KWwmncfrca1znxtdQ4l+eP5fcBza4D7jZM1vD62k7NFL9LqGByreMOzY0YCg08oy/S2iQ8t1Y3ESPhk3DY2Y7NgjdKTa1z5ixoWm4C+s4bO41otUebEZ3m4ZEueO0uVe3QUDBxh4bG2cwNvd63MDfd9yI6unnc2m+ffqRInz6Dw==&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+          <script type="text/javascript" src="https://app.diagrams.net/js/viewer-static.min.js"></script>
+    </article>
     </main>
-    
     <!--FOOTER -->
     <footer>
       <!-- Main Footer -->
@@ -330,8 +318,6 @@
             </div>
           </div>
         </div>
-      </section>
-      <hr class="break margin-top-bottom-0" style="border-color: rgba(0, 38, 51, 0.80);">
       
       <!-- Bottom Footer -->
       <section class="padding background-dark">
@@ -352,3 +338,38 @@
      
    </body>
 </html>
+
+
+
+<!-- 
+</section>
+<hr class="break margin-top-bottom-0" style="border-color: rgba(0, 38, 51, 0.80);">
+<div class="line">
+  <div class="margin">
+    <div class="s-12 m-12 l-6 margin-m-bottom-30">
+      <h2>Mirum est notare quam littera gothica</h2>
+      <p>
+      Typi non habent claritatem insitam est usus legentis in iis qui facit eorum claritatem. 
+      Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. 
+      Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+      </p>
+    </div>
+    <div class="s-12 m-12 l-6">
+      <h2>Claritas est etiam processus dynamicus</h2>
+      <p>
+      Typi non habent claritatem insitam est usus legentis in iis qui facit eorum claritatem. 
+      Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. 
+      Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum.
+      </p>
+    </div>
+  </div>  
+</div>
+</div>
+</div> 
+</article>
+
+
+
+<blockquote class="margin-top-bottom-20">
+Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima.
+</blockquote> -->
