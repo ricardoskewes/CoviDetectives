@@ -88,7 +88,7 @@
              
             
             <br>
-            <h2 class="text-size-30">Cadenas de Markov</h2>
+            <h2 class="text-size-30">Iniciando con el modelo</h2>
             <p class="margin-bottom-40">
             Nuestro modelo se basa <b>sobre</b> una cadena de Markov de tiempo discreto que contiene cuatro estados de transición. Denotaremos por el conjunto \(S = {1,2,3,4}\) el conjunto de estados posibles
             \(s_{ij} (t = 0) = 0\) para todo \(i = 1,2, ..., N_j\), para la j-ésima entidad federativa, donde \(N_j\) es la población total. Como México tiene 32 entidades federativas, \(j = 1, 2, ..., 32\).
@@ -229,6 +229,28 @@
                 <img class="margin-bottom" src="img/img-03.jpg" alt="">
                 <h2 class="text-thin">Disminuye</h2>
                 <p>Cuando mucha gente ya se recuperó de la enfermedad (puntos azules) y se vuelven inmunes</p>          
+              </div>
+            </div>
+          </div>
+          <br>
+          <p>Cada uno de estas características evidentes, podemos traducirlas al lenguaje de las matemáticas así:</p>
+          <br>
+          <div class="line">
+            <div class="margin">
+              <div class="s-12 m-12 l-4 margin-m-bottom">
+                <img class="margin-bottom" src="img/img-01.jpg" alt="">
+                <h2 class="text-thin">$$N_1(t)^{-\alpha}$$</h2>
+                <p>Si \(N_1\) aumenta, la probabilidad disminuye, pues el exponente es negativo. El parámetro \(\alpha\) otorga no-linealidad</p>               
+              </div>
+              <div class="s-12 m-12 l-4 margin-m-bottom">
+                <img class="margin-bottom" src="img/img-02.jpg" alt="">
+                <h2 class="text-thin">$$N_2(t)^{\beta}$$</h2>
+                <p>Si \(N_2\) aumenta, la probabilidad aumenta, pues el exponente es positivo. El parámetro \(\beta\) otorga no-linealidad</p>                
+              </div>
+              <div class="s-12 m-12 l-4 margin-m-bottom">
+                <img class="margin-bottom" src="img/img-03.jpg" alt="">
+                <h2 class="text-thin">$$[\rho_{\infty}-\frac{N_3(t)}{N_1(t)+N_2(t)+N_3(t)}]^{\gamma}$$</h2>
+                <p>Si la cantidad de casos históricos aumenta, la probabilidad disminuye, pues la expresión entre corchetes tiende a cero. El parámetro \(\beta\) otorga no-linealidad</p>          
               </div>
             </div>
           </div>
