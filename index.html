@@ -15,7 +15,11 @@
     <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>    
     <script type="text/javascript" src="js/validation.js"></script>
-    
+    <script>
+      function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+      }
+    </script>
    
   </head>  
   
@@ -128,7 +132,7 @@
       <!-- MAS INFO QUE FALTA POR AGREGAR-->
       <section class="section background-white">
         <div class="full-width text-center">
-          <iframe class="center margin-bottom-30" style="margin-top: -160px;" width="854" height="480" 
+          <iframe class="center margin-bottom-30" frameborder="0" scrolling="no" onload="resizeIframe(this);"" 
           src="https://www.youtube.com/embed/tgbNymZ7vqY">
           </iframe> 
           <!-- <img class="center margin-bottom-30" style="margin-top: -210px;" src="img/bio.png" alt=""> -->
