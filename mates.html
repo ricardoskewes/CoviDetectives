@@ -254,10 +254,26 @@
               </div>
             </div>
           </div>
-                <br> </br> <br> </br>
-                <h2 class="text-thin">$$\pi_{12} \approx N_1(t)^{-\alpha} * N_2(t)^{\beta} * [\rho_{\infty}-\frac{N_3(t)}{N_1(t)+N_2(t)+N_3(t)}]^{\gamma}$$ </h2>
-                <p> Si podemos calcular Pi12 entonces podemos calcular Pi11 por la condición de normalización de probabilidades, es decir,<b> deben sumar todas 1</b> </p>
-                <h2 class="text-thin">$$\pi_{11} = 1 - \pi_{12}$$ </h2>
+                <br> <br>
+                <h2 class="text-thin">$$\pi_{12} \approx N_1(t)^{-\alpha} \cdot N_2(t)^{\beta} \cdot \left[\rho_{\infty}-\frac{N_3(t)}{N_1(t)+N_2(t)+N_3(t)}\right]^{\gamma}$$ </h2>
+                <p> Si podemos calcular \(\pi_{12}\) entonces podemos calcular \(\pi_{11}\) por la condición de normalización de probabilidades, es decir,<b> deben sumar todas 1</b> </p>
+                
+                <h2 class="text-thin">$$\pi_{11} = 1 - \pi_{12}$$</h2>
+    
+                <h2 class="text-size-30">Probabilidades referentes al modo dos</h2>
+                <p>Mientras que en el artículo alemán se introduce un parámetro extra, \(r\), que tiene que ver con la fracción de infectados silenciosos, nuestro estado 2 está repartido entre el 2 y 3 de ellos por
+                la elección de ellos respecto a la clasificación de los estados. Por eso, tuvimos que idear una nueva manera de aproximar las probabilidades.</p>
+                <h2 class="headline text-thin text-s-size-30"><span class="text-primary">Hecho de la medicina:</span> el promedio de recuperación es del orden de una quincena en la población general.</a></h2>
+                <p> <a href="https://www.cdc.gov/mmwr/volumes/69/wr/mm6930e1.htm">(Haz clic aquí para ver estudio de la CDC. Notar que esto es universalmente cierto, no solo en los Estados Unidos.)</a></p>
+                <h3 class="text-size-30">¡Hicimos algo ingenioso para resolverlo!</h3>
+                <p> Para el paso discreto de tiempo, \(\tau\), elegimos un valor representativo que nos evitó muchos problemas al implementarlo en Python. Debido a la naturaleza exponencial de las curvas de recuperación
+                  asignamos \(\tau = \text{15 días}\).</p>
+                  <p>Este valor es del orden de la constante del tiempo asociada a la recuperación. Por ello, podemos asumir un modelo simplificado donde el futuro de las personas, tras exactamente 15 días, 
+                  se ve definido. Por ello, podemos aproximar \(\pi_{22}\approx 0\): en quince días (exactos), asumimos que el estado <b>debe</b> transicionar.</p>
+                <p>Finalmente, \(\pi{24}\), una constante, se computa de manera muy sencilla:</p>
+                <div class="mxgraph" style="margin-left:auto; margin-right:auto;border:1px solid transparent;" data-mxgraph="{&quot;nav&quot;:true,&quot;resize&quot;:true,&quot;toolbar&quot;:&quot;zoom layers lightbox&quot;,&quot;edit&quot;:&quot;_blank&quot;,&quot;xml&quot;:&quot;&lt;mxfile host=\&quot;app.diagrams.net\&quot; modified=\&quot;2020-08-16T03:59:28.022Z\&quot; agent=\&quot;5.0 (Macintosh)\&quot; etag=\&quot;pnZOm6QBXdu-2mXWVzrI\&quot; version=\&quot;13.6.2\&quot; type=\&quot;google\&quot;&gt;&lt;diagram id=\&quot;3228e29e-7158-1315-38df-8450db1d8a1d\&quot; name=\&quot;Page-1\&quot;&gt;1ZdNc9owEIZ/jWd6SQck4cRHcD7aQ2bapjPtVdjC1kS2iCwbyK/vypbARtBmGkoTH4L1rrxaPfsG5ADHxfpO0WV+L1MmAjRK1wG+DhAahxGBD6NsOiXCo07IFE/tpJ3wwJ+ZFd20mqesGkzUUgrNl0MxkWXJEj3QqFJyNZy2kGK46pJmzBMeEip89QdPdW5V2Ngu8InxLLdLX6HLLjCnyWOmZF3a9QKEF+3VhQvqctmNVjlN5aon4ZsAx0pK3d0V65gJw9Zh6567PRLd1q1YqV/yABpPsO1VQ0Vtt/+FqUqWtOoIt39tuXrjEGm2hhVmC1lq2z9EYEwFz0oYJFAAUyA0TGkOZKc2UPA0NTlmuS4EjMc2SSyFVG1qfNteoPu7sRs0Sdm6J9nd3TFZMK02MMVFCfk46R6yXoRuOWXV621kO5L32nppNWrtlG3T75DCjaV6nPDEI/yNNVLUmhu67xNsGEX/H2zogf2uaMrfM1ficZ1Mzs710uN6zwXX1GY6gNXD+AJavVaMw9PQm4T79MbRIXrkADxyInhXHrxYlgvB4XfqbcMjZB8eGZ8bXuTDy6ms3jg5/8vw7ORcmh45oEPLhL1xdv6/LCbnZFf9rNim+fxYrurbr5sGPyc/FxeHgQYoFIZcyhu4zXQLoJMMmAHl8KmWLnBRtcimMAGR5XoXdFl6B64nWAzF5sCr7Ji3PRylQYyD6bURTdgtPFf7pcCGu2o8+UDdv9mKO5W7YrFft6AFNJ7OBTOftvCiZmAHUyKefnh1mXvebc/WzLQO0s9WOdfsYUkTE13Bu8jQxZVW8pE5H5eyND/jCy5Ez9rhdHZNZtulPN8ecPdxK4/2DkQjz8XbOX0bo6t/6WN01Md/a1p4H3D8dqL7kjiFuSs5V6zhjbHREbe8xhd7Fhi112ksAMn+6IEQncgDMNy9Krax3vs4vvkF&lt;/diagram&gt;&lt;/mxfile&gt;&quot;}"></div>
+                <script type="text/javascript" src="https://app.diagrams.net/js/viewer-static.min.js"></script>
+                <h2 class="text-thin">$$\pi_{24} \approx \frac{\text{personas que mueren}}{\text{personas que enfermaron quince días antes}}$$ </h2>
     </article>
     </main>
  
